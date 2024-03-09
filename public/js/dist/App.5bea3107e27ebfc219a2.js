@@ -611,6 +611,75 @@ function OrderListItem(_ref) {
 
 /***/ }),
 
+/***/ "./src/components/SearchBar/SearchBar.js":
+/*!***********************************************!*\
+  !*** ./src/components/SearchBar/SearchBar.js ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* unused harmony export SearchBar */
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* provided dependency */ var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+const SearchBar = _ref => {
+  let {
+    input,
+    setInput
+  } = _ref;
+  const handleChange = value => {
+    setInput(value);
+  };
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("input", {
+    placeholder: "Type here to search",
+    value: input,
+    onChange: e => handleChange(e.target.value)
+  }));
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SearchBar);
+
+/***/ }),
+
+/***/ "./src/components/SearchedItem/SearchedItem.js":
+/*!*****************************************************!*\
+  !*** ./src/components/SearchedItem/SearchedItem.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ SearchedItem)
+/* harmony export */ });
+/* harmony import */ var _ClothesList_ClothesList__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ClothesList/ClothesList */ "./src/components/ClothesList/ClothesList.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* provided dependency */ var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+
+function SearchedItem(_ref) {
+  let {
+    input,
+    allClothes
+  } = _ref;
+  const [searchedItems, setSearchedItems] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]);
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
+    const foundClothes = allClothes.filter(cloth => cloth.title.toLowerCase().includes(input.toLowerCase().trim()));
+    setSearchedItems(foundClothes);
+  }, [input]);
+
+  // const searchedClothes = () => {
+  //     return allClothes.filter(cloth => cloth.title.toLowerCase().includes(input.toLowerCase().trim()))}
+  //    console.log(searchedClothes())
+
+  return /*#__PURE__*/React.createElement(React.Fragment, null, searchedItems.length ? /*#__PURE__*/React.createElement(_ClothesList_ClothesList__WEBPACK_IMPORTED_MODULE_0__["default"], {
+    clothes: searchedItems
+  }) : 'NO match items');
+}
+
+/***/ }),
+
 /***/ "./src/components/SignUpForm/SignUpForm.js":
 /*!*************************************************!*\
   !*** ./src/components/SignUpForm/SignUpForm.js ***!
@@ -1021,14 +1090,20 @@ function ClotheListPage(_ref) {
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
-/* harmony import */ var _utilities_orders_api__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../utilities/orders-api */ "./src/utilities/orders-api.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
+/* harmony import */ var _utilities_orders_api__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../utilities/orders-api */ "./src/utilities/orders-api.js");
+/* harmony import */ var _utilities_items_api__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../utilities/items-api */ "./src/utilities/items-api.js");
 /* harmony import */ var _components_CategoryList_CategoryList__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/CategoryList/CategoryList */ "./src/components/CategoryList/CategoryList.js");
 /* harmony import */ var _components_Header_Header__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/Header/Header */ "./src/components/Header/Header.js");
 /* harmony import */ var _components_OrderDetail2_OrderDetail2__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/OrderDetail2/OrderDetail2 */ "./src/components/OrderDetail2/OrderDetail2.js");
 /* harmony import */ var _components_InitialDisplay_initialDisplay__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components/InitialDisplay/initialDisplay */ "./src/components/InitialDisplay/initialDisplay.js");
 /* harmony import */ var _HomePage_module_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./HomePage.module.scss */ "./src/pages/HomePage/HomePage.module.scss");
+/* harmony import */ var _components_SearchedItem_SearchedItem__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/SearchedItem/SearchedItem */ "./src/components/SearchedItem/SearchedItem.js");
+/* harmony import */ var _components_SearchBar_SearchBar__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../components/SearchBar/SearchBar */ "./src/components/SearchBar/SearchBar.js");
 /* provided dependency */ var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+
+
 
 
 
@@ -1047,10 +1122,10 @@ function HomePage(_ref) {
 
   // toggle to see which page/components to show
   const [showOrderCart, setShowOrderCart] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
-  const navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_6__.useNavigate)();
+  const navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_8__.useNavigate)();
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     async function getCart() {
-      const cart = await _utilities_orders_api__WEBPACK_IMPORTED_MODULE_7__.getCart();
+      const cart = await _utilities_orders_api__WEBPACK_IMPORTED_MODULE_9__.getCart();
       setCart(cart);
     }
     getCart();
@@ -1073,20 +1148,39 @@ function HomePage(_ref) {
     aboutQuantity();
   }, [cart]);
   async function handleChangeQty(itemId, newQty) {
-    const updatedCart = await _utilities_orders_api__WEBPACK_IMPORTED_MODULE_7__.setItemQtyInCart(itemId, newQty);
+    const updatedCart = await _utilities_orders_api__WEBPACK_IMPORTED_MODULE_9__.setItemQtyInCart(itemId, newQty);
     setCart(updatedCart);
   }
   async function handleCheckout() {
-    await _utilities_orders_api__WEBPACK_IMPORTED_MODULE_7__.checkout();
+    await _utilities_orders_api__WEBPACK_IMPORTED_MODULE_9__.checkout();
     navigate('/orders');
   }
+  const [allClothes, setAllClothes] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
+    async function getAllClothes() {
+      try {
+        const clothes = await _utilities_items_api__WEBPACK_IMPORTED_MODULE_10__.getAll();
+        setAllClothes(clothes);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    getAllClothes();
+  }, []);
+  const [input, setInput] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
   return /*#__PURE__*/React.createElement("div", {
     className: _HomePage_module_scss__WEBPACK_IMPORTED_MODULE_5__["default"].HomePage
   }, /*#__PURE__*/React.createElement(_components_Header_Header__WEBPACK_IMPORTED_MODULE_2__["default"], {
     setUser: setUser,
     quantity: quantity,
     setShowOrderCart: setShowOrderCart
-  }), /*#__PURE__*/React.createElement("h3", null, "Welcome! ", user.name), /*#__PURE__*/React.createElement(_components_CategoryList_CategoryList__WEBPACK_IMPORTED_MODULE_1__["default"], null), /*#__PURE__*/React.createElement(_components_InitialDisplay_initialDisplay__WEBPACK_IMPORTED_MODULE_4__["default"], null), showOrderCart ? /*#__PURE__*/React.createElement("div", {
+  }), /*#__PURE__*/React.createElement("h3", null, "Welcome! ", user.name), /*#__PURE__*/React.createElement(_components_SearchBar_SearchBar__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    input: input,
+    setInput: setInput
+  }), /*#__PURE__*/React.createElement(_components_CategoryList_CategoryList__WEBPACK_IMPORTED_MODULE_1__["default"], null), input ? /*#__PURE__*/React.createElement(_components_SearchedItem_SearchedItem__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    input: input,
+    allClothes: allClothes
+  }) : /*#__PURE__*/React.createElement(_components_InitialDisplay_initialDisplay__WEBPACK_IMPORTED_MODULE_4__["default"], null), showOrderCart ? /*#__PURE__*/React.createElement("div", {
     className: _HomePage_module_scss__WEBPACK_IMPORTED_MODULE_5__["default"].DarkOverlay
   }, /*#__PURE__*/React.createElement(_components_OrderDetail2_OrderDetail2__WEBPACK_IMPORTED_MODULE_3__["default"], {
     order: cart,
@@ -3679,4 +3773,4 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 /******/ 	
 /******/ })()
 ;
-//# sourceMappingURL=App.c5f16605291ba76e079b8d41b2478723.js.map
+//# sourceMappingURL=App.f07721949f91f0734bd1fb822c50c61e.js.map
