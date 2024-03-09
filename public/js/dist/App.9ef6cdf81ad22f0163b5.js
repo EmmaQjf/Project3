@@ -653,20 +653,35 @@ const SearchBar = _ref => {
 /* harmony export */   "default": () => (/* binding */ SearchedItem)
 /* harmony export */ });
 /* harmony import */ var _ClothesList_ClothesList__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ClothesList/ClothesList */ "./src/components/ClothesList/ClothesList.js");
+/* harmony import */ var _utilities_items_api__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../utilities/items-api */ "./src/utilities/items-api.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* provided dependency */ var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 
 
+
 function SearchedItem(_ref) {
   let {
-    input,
-    allClothes
+    input
   } = _ref;
+  const [allClothes, setAllClothes] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(null);
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
+    async function getAllClothes() {
+      try {
+        const clothes = await _utilities_items_api__WEBPACK_IMPORTED_MODULE_2__.getAll();
+        setAllClothes(clothes);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    getAllClothes();
+  }, []);
   const [searchedItems, setSearchedItems] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]);
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
-    const foundClothes = allClothes.filter(cloth => cloth.title.toLowerCase().includes(input.toLowerCase().trim()));
-    setSearchedItems(foundClothes);
+    if (allClothes) {
+      const foundClothes = allClothes.filter(cloth => cloth.title.toLowerCase().includes(input.toLowerCase().trim()));
+      setSearchedItems(foundClothes);
+    }
   }, [input]);
 
   // const searchedClothes = () => {
@@ -1092,7 +1107,6 @@ function ClotheListPage(_ref) {
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/dist/index.js");
 /* harmony import */ var _utilities_orders_api__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../utilities/orders-api */ "./src/utilities/orders-api.js");
-/* harmony import */ var _utilities_items_api__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../utilities/items-api */ "./src/utilities/items-api.js");
 /* harmony import */ var _components_CategoryList_CategoryList__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/CategoryList/CategoryList */ "./src/components/CategoryList/CategoryList.js");
 /* harmony import */ var _components_Header_Header__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../components/Header/Header */ "./src/components/Header/Header.js");
 /* harmony import */ var _components_OrderDetail2_OrderDetail2__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../components/OrderDetail2/OrderDetail2 */ "./src/components/OrderDetail2/OrderDetail2.js");
@@ -1101,7 +1115,6 @@ function ClotheListPage(_ref) {
 /* harmony import */ var _components_SearchedItem_SearchedItem__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/SearchedItem/SearchedItem */ "./src/components/SearchedItem/SearchedItem.js");
 /* harmony import */ var _components_SearchBar_SearchBar__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../components/SearchBar/SearchBar */ "./src/components/SearchBar/SearchBar.js");
 /* provided dependency */ var React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-
 
 
 
@@ -1155,18 +1168,6 @@ function HomePage(_ref) {
     await _utilities_orders_api__WEBPACK_IMPORTED_MODULE_9__.checkout();
     navigate('/orders');
   }
-  const [allClothes, setAllClothes] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null);
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
-    async function getAllClothes() {
-      try {
-        const clothes = await _utilities_items_api__WEBPACK_IMPORTED_MODULE_10__.getAll();
-        setAllClothes(clothes);
-      } catch (error) {
-        console.error(error);
-      }
-    }
-    getAllClothes();
-  }, []);
   const [input, setInput] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('');
   return /*#__PURE__*/React.createElement("div", {
     className: _HomePage_module_scss__WEBPACK_IMPORTED_MODULE_5__["default"].HomePage
@@ -1178,8 +1179,7 @@ function HomePage(_ref) {
     input: input,
     setInput: setInput
   }), /*#__PURE__*/React.createElement(_components_CategoryList_CategoryList__WEBPACK_IMPORTED_MODULE_1__["default"], null), input ? /*#__PURE__*/React.createElement(_components_SearchedItem_SearchedItem__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    input: input,
-    allClothes: allClothes
+    input: input
   }) : /*#__PURE__*/React.createElement(_components_InitialDisplay_initialDisplay__WEBPACK_IMPORTED_MODULE_4__["default"], null), showOrderCart ? /*#__PURE__*/React.createElement("div", {
     className: _HomePage_module_scss__WEBPACK_IMPORTED_MODULE_5__["default"].DarkOverlay
   }, /*#__PURE__*/React.createElement(_components_OrderDetail2_OrderDetail2__WEBPACK_IMPORTED_MODULE_3__["default"], {
@@ -3773,4 +3773,4 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 /******/ 	
 /******/ })()
 ;
-//# sourceMappingURL=App.f07721949f91f0734bd1fb822c50c61e.js.map
+//# sourceMappingURL=App.81d288b4117c0776a9e945760a2e2296.js.map

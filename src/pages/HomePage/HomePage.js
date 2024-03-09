@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import * as ordersAPI from '../../utilities/orders-api';
-import * as itemsAPI from '../../utilities/items-api';
+
 import CategoryList from '../../components/CategoryList/CategoryList';
 import Header from '../../components/Header/Header'
 import OrderDetail2 from '../../components/OrderDetail2/OrderDetail2';
@@ -61,18 +61,7 @@ export default function HomePage(
 
 
           
-          const [allClothes, setAllClothes]= useState(null)
-        useEffect(() => {
-        async function getAllClothes() {
-            try {
-                const clothes = await itemsAPI.getAll();
-                setAllClothes(clothes);
-            } catch (error) {
-                console.error(error);
-            }
-        }
-        getAllClothes();
-       }, []);
+          
 
           const [input, setInput] = useState('')
           
@@ -89,7 +78,7 @@ export default function HomePage(
             <CategoryList/>
             {
                 input?
-                <SearchedItem  input={input} allClothes={allClothes}/>:<InitialDisplay/>
+                <SearchedItem  input={input}/>:<InitialDisplay/>
             }
             
              
