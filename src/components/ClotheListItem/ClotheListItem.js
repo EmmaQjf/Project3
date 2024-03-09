@@ -1,10 +1,8 @@
 import styles from './ClotheListItem.module.scss'
+import {Link} from 'react-router-dom'
+
 export default function ClotheListItem(
-    {   cloth,
-        setCurrentItem,
-        showClothPage,
-        setShowClothPage
-    }
+    {cloth}
 ){   
 
     return(
@@ -15,7 +13,7 @@ export default function ClotheListItem(
                 <h3 className={styles.h3}>{cloth.title} </h3>
                 <h3 className={styles.h3}>${cloth.price} </h3>
                 
-                <button onClick={()=> {setShowClothPage(!showClothPage); setCurrentItem(cloth)}}> More details</button>
+                <Link to= {`/ClotheItem/${cloth._id}`}> <button> More details</button></Link>
              </div>  
         </div>
     )
