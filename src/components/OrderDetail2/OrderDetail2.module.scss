@@ -1,0 +1,68 @@
+.container{
+    position: fixed;
+    right:0;
+    top:0;
+    background-color: whitesmoke;
+}
+
+.OrderDetail {
+   
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 3vmin;
+    font-size: 2vmin;
+    color: var(--text-dark);
+    z-index:5;
+    width: 40vw;
+    height: 100%;
+    
+  }
+
+
+  .OrderDetail .cartTitle {
+    font-size:2.5vmin;
+    color:darkblue;
+    font-weight: 1000;
+  }
+  .OrderDetail .lineItemContainer {
+    margin-top: 3vmin;
+    justify-content: flex-start;
+    height: calc(100vh - 18vmin);
+    width: 100%;
+  }
+  
+  .OrderDetail .total {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 18.35vw 5.75vw 5.25vw;
+    padding: 1vmin 0;
+    color: var(--text-light);
+    border-top: .1vmin solid var(--tan-3);
+  }
+  
+  .OrderDetail .total span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5vw;
+    color: var(--text-dark);
+  }
+  
+  .OrderDetail .total span.right {
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .OrderDetail .hungry {
+    position: absolute;
+    top: 50vh;
+    font-size: 2vmin;
+  }
+
+  .OrderDetail .home{
+    position: absolute;
+    top:1vw;
+    right: 2vw;
+
+  }

@@ -1,0 +1,33 @@
+.container{
+    .card{
+        flex: 1;
+        margin: 0 2vw;
+        width: 280px;
+        height: 400px;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 70% 10% 10% 10%;
+        align-items:center;
+        justify-items: center;
+        overflow: hidden;
+    }
+
+   :hover{
+        box-shadow: 0 0 20px gray;
+        opacity: 1;
+    }
+
+    .image {
+        width: 80%; 
+        height: 90%;
+      }
+    
+    .h3{
+        padding: 0.4vw;
+        margin: 0.4vw;
+        font-size: 1.6vw;
+    }
+}
+
+    
+    
